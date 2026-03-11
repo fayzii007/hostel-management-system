@@ -42,13 +42,7 @@ const Complaints = () => {
                                 <td>{complaint.description}</td>
                                 <td>{new Date(complaint.createdAt).toLocaleDateString()}</td>
                                 <td>
-                                    <span style={{
-                                        padding: '4px 8px',
-                                        borderRadius: '12px',
-                                        fontSize: '0.8rem',
-                                        background: complaint.status === 'Resolved' ? '#e8f5e9' : '#fff3e0',
-                                        color: complaint.status === 'Resolved' ? '#2e7d32' : '#e65100'
-                                    }}>
+                                    <span className={`badge ${complaint.status === 'Resolved' ? 'success' : 'warning'}`}>
                                         {complaint.status}
                                     </span>
                                 </td>

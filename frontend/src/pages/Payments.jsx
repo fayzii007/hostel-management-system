@@ -42,13 +42,7 @@ const Payments = () => {
                                 <td>${payment.amount}</td>
                                 <td>{new Date(payment.paymentDate).toLocaleDateString()}</td>
                                 <td>
-                                    <span style={{
-                                        padding: '4px 8px',
-                                        borderRadius: '12px',
-                                        fontSize: '0.8rem',
-                                        background: payment.status === 'Paid' ? '#e8f5e9' : '#ffebee',
-                                        color: payment.status === 'Paid' ? '#2e7d32' : '#c62828'
-                                    }}>
+                                    <span className={`badge ${payment.status === 'Paid' ? 'success' : 'danger'}`}>
                                         {payment.status}
                                     </span>
                                 </td>

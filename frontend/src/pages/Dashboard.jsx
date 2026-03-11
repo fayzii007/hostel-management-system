@@ -36,20 +36,20 @@ const Dashboard = () => {
     return (
         <div className="page">
             <h2>Admin Dashboard</h2>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px', marginTop: '20px' }}>
-                <div style={{ padding: '20px', background: '#e3f2fd', borderRadius: '8px', textAlign: 'center' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '24px', margin: '24px 0' }}>
+                <div className="stat-card pastel-blue">
                     <h3>Total Students</h3>
                     <h2>{stats.students}</h2>
                 </div>
-                <div style={{ padding: '20px', background: '#e8f5e9', borderRadius: '8px', textAlign: 'center' }}>
+                <div className="stat-card pastel-green">
                     <h3>Total Rooms</h3>
                     <h2>{stats.rooms}</h2>
                 </div>
-                <div style={{ padding: '20px', background: '#ffebee', borderRadius: '8px', textAlign: 'center' }}>
+                <div className="stat-card pastel-orange">
                     <h3>Complaints</h3>
                     <h2>{stats.complaints}</h2>
                 </div>
-                <div style={{ padding: '20px', background: '#fff3e0', borderRadius: '8px', textAlign: 'center' }}>
+                <div className="stat-card pastel-purple">
                     <h3>Payments</h3>
                     <h2>{stats.payments}</h2>
                 </div>

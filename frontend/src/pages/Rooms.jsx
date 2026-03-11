@@ -42,13 +42,7 @@ const Rooms = () => {
                                 <td>{room.capacity}</td>
                                 <td>{room.occupancy}</td>
                                 <td>
-                                    <span style={{
-                                        padding: '4px 8px',
-                                        borderRadius: '12px',
-                                        fontSize: '0.8rem',
-                                        background: room.occupancy >= room.capacity ? '#ffebee' : '#e8f5e9',
-                                        color: room.occupancy >= room.capacity ? '#c62828' : '#2e7d32'
-                                    }}>
+                                    <span className={`badge ${room.occupancy >= room.capacity ? 'danger' : 'success'}`}>
                                         {room.occupancy >= room.capacity ? 'Full' : 'Available'}
                                     </span>
                                 </td>
