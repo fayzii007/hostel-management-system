@@ -6,9 +6,9 @@ const Navbar = () => {
 
     return (
         <nav className="navbar">
-            <Link to="/" className="navbar-brand">HMS Admin</Link>
+            <Link to="/dashboard" className="navbar-brand">HMS Admin</Link>
             <div className="nav-links">
-                <Link to="/" className={location.pathname === '/' ? 'active' : ''}>Dashboard</Link>
+                <Link to="/dashboard" className={location.pathname === '/dashboard' ? 'active' : ''}>Dashboard</Link>
                 <Link to="/students" className={location.pathname === '/students' ? 'active' : ''}>Students</Link>
                 <Link to="/rooms" className={location.pathname === '/rooms' ? 'active' : ''}>Rooms</Link>
                 <Link to="/complaints" className={location.pathname === '/complaints' ? 'active' : ''}>Complaints</Link>
