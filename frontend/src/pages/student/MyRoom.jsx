@@ -9,7 +9,7 @@ const MyRoom = () => {
         type: 'Double Sharing',
         bedNumber: 'Bed A',
         checkIn: '2024-07-15',
-        roommates: ['Rahul Verma'],
+        roommates: ['Khalid Naufal Khalid'],
     };
 
     return (

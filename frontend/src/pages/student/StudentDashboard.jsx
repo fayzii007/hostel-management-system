@@ -2,7 +2,7 @@ import React from 'react';
 import { BedDouble, CreditCard, MessageSquarePlus, Bell } from 'lucide-react';
 
 const STUDENT = {
-    name: 'Arjun Sharma',
+    name: 'Mohammed Fayaz VP',
     studentId: 'ST-2024-001',
     room: '100',
     feeStatus: 'Paid',
