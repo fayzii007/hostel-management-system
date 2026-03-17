@@ -40,7 +40,7 @@ const Complaints = () => {
                             <tr><td colSpan="5" style={{ textAlign: 'center', padding: '32px' }}>No complaints found</td></tr>
                         ) : (
                             complaints.map(complaint => (
-                                <tr key={complaint._id}>
+                                <tr key={complaint.id}>
                                     <td>
                                         <span className="badge info">{complaint.studentId}</span>
                                     </td>
@@ -50,7 +50,7 @@ const Complaints = () => {
                                         </div>
                                     </td>
                                     <td style={{ color: 'var(--text-muted)' }}>
-                                        {new Date(complaint.createdAt).toLocaleDateString()}
+                                        {new Date(complaint.created_at).toLocaleDateString()}
                                     </td>
                                     <td>
                                         <span className={`badge ${complaint.status === 'Resolved' ? 'success' : 'warning'}`}>

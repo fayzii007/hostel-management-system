@@ -42,7 +42,7 @@ const Payments = () => {
                             <tr><td colSpan="4" style={{ textAlign: 'center', padding: '32px' }}>No payments recorded</td></tr>
                         ) : (
                             payments.map(payment => (
-                                <tr key={payment._id}>
+                                <tr key={payment.id}>
                                     <td>
                                         <span className="badge info">{payment.studentId}</span>
                                     </td>

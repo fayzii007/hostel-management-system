@@ -66,7 +66,7 @@ const Rooms = () => {
                             <tr><td colSpan="5" style={{ textAlign: 'center', padding: '32px' }}>No rooms found</td></tr>
                         ) : (
                             rooms.map(room => (
-                                <tr key={room._id}>
+                                <tr key={room.id}>
                                     <td style={{ fontWeight: 500 }}>{room.roomNumber}</td>
                                     <td>{room.capacity}</td>
                                     <td>{room.occupancy}</td>
@@ -79,7 +79,7 @@ const Rooms = () => {
                                         <button
                                             className="icon-btn"
                                             style={{ color: '#EF4444', width: '32px', height: '32px' }}
-                                            onClick={() => handleDelete(room._id)}
+                                            onClick={() => handleDelete(room.id)}
                                             title="Delete Room"
                                         >
                                             <Trash2 size={16} />

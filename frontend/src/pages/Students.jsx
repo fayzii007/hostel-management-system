@@ -67,7 +67,7 @@ const Students = () => {
                             <tr><td colSpan="6" style={{ textAlign: 'center', padding: '32px' }}>No students found</td></tr>
                         ) : (
                             students.map(student => (
-                                <tr key={student._id}>
+                                <tr key={student.id}>
                                     <td style={{ fontWeight: 500 }}>{student.name}</td>
                                     <td>
                                         <span className="badge info">{student.studentId}</span>
@@ -85,7 +85,7 @@ const Students = () => {
                                         <button
                                             className="icon-btn"
                                             style={{ color: '#EF4444', width: '32px', height: '32px' }}
-                                            onClick={() => handleDelete(student._id)}
+                                            onClick={() => handleDelete(student.id)}
                                             title="Delete Student"
                                         >
                                             <Trash2 size={16} />
