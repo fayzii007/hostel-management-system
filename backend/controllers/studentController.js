@@ -120,10 +120,35 @@ const deleteStudent = async (req, res) => {
     }
 };
 
+// @desc    Get roommates for a student in a specific room
+// @route   GET /api/students/roommates/:roomNumber?exclude=:studentId
+// @access  Public
+const getRoommates = async (req, res) => {
+    try {
+        const { roomNumber } = req.params;
+        const { exclude } = req.query;
+
+        if (!roomNumber) return res.status(400).json({ message: 'Room number is required' });
+
+        const { data, error } = await supabase
+            .from('students')
+            .select('full_name, student_id')
+            .eq('room_number', roomNumber)
+            .neq('student_id', exclude || '');
+
+        if (error) throw error;
+        res.status(200).json(data);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 module.exports = {
     getStudents,
     createStudent,
     updateStudent,
-    deleteStudent
+    deleteStudent,
+    getRoommates
 };
+
 

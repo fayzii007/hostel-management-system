@@ -135,7 +135,7 @@ Backend
 - Express
 
 Database
-- MongoDB
+- supabase
 
 Version Control
 - Git

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { BedDouble, Users, Calendar, Loader2 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
-import { supabase } from '../../services/supabase';
+import api from '../../services/api';
 
 const MyRoom = () => {
     const { student } = useAuth();
@@ -17,17 +17,15 @@ const MyRoom = () => {
     const fetchRoommates = async () => {
         setLoading(true);
         try {
-            const { data, error } = await supabase
-                .from('students')
-                .select('full_name')
-                .eq('room_number', student.room_number)
-                .neq('id', student.id); // Exclude current student
-            
-            if (!error) setRoommates(data.map(s => s.full_name));
+            const { data } = await api.get(`/students/roommates/${student.room_number}?exclude=${student.student_id}`);
+            setRoommates(data.map(s => s.full_name));
+        } catch (err) {
+            console.error('Roommate fetch error:', err);
         } finally {
             setLoading(false);
         }
     };
+
 
     if (!student?.room_number) {
         return (
