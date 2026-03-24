@@ -18,7 +18,7 @@ const MyRoom = () => {
         setLoading(true);
         try {
             const { data } = await api.get(`/students/roommates/${student.room_number}?exclude=${student.student_id}`);
-            setRoommates(data.map(s => s.full_name));
+            setRoommates(data);
         } catch (err) {
             console.error('Roommate fetch error:', err);
         } finally {
@@ -82,12 +82,26 @@ const MyRoom = () => {
                     </h3>
                     {loading ? <div style={{ textAlign: 'center', padding: '20px 0' }}><Loader2 className="spin" /></div> : (
                         roommates.length === 0 ? <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>No roommates yet.</p> : (
-                            roommates.map((name, i) => (
-                                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 0', borderBottom: i < roommates.length - 1 ? '1px solid var(--border)' : 'none' }}>
-                                    <div style={{ width: 36, height: 36, background: '#EEF2FF', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#4F46E5', fontWeight: 700, fontSize: '0.9rem' }}>
-                                        {name[0]}
+                            roommates.map((m, i) => (
+                                <div key={i} style={{ padding: '16px 0', borderBottom: i < roommates.length - 1 ? '1px solid var(--border)' : 'none' }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12 }}>
+                                        <div style={{ width: 40, height: 40, background: '#EEF2FF', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#4F46E5', fontWeight: 700, fontSize: '1rem' }}>
+                                            {m.full_name[0]}
+                                        </div>
+                                        <div>
+                                            <p style={{ margin: 0, fontWeight: 700, fontSize: '0.95rem' }}>{m.full_name}</p>
+                                            <p style={{ margin: 0, fontSize: '0.75rem', color: '#64748B' }}>{m.student_id}</p>
+                                        </div>
                                     </div>
-                                    <p style={{ margin: 0, fontWeight: 600, fontSize: '0.95rem' }}>{name}</p>
+                                    
+                                    {/* Preference Tags */}
+                                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                                        {[m.sleep_time, m.cleanliness, m.study_preference, m.noise_tolerance].filter(Boolean).map((pref, pi) => (
+                                            <span key={pi} style={{ fontSize: '0.65rem', background: '#F8FAFC', border: '1px solid #E2E8F0', padding: '2px 8px', borderRadius: '6px', fontWeight: 600, color: '#475569' }}>
+                                                {pref}
+                                            </span>
+                                        ))}
+                                    </div>
                                 </div>
                             ))
                         )

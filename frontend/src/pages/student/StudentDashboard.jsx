@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { BedDouble, CreditCard, MessageSquarePlus, Bell, User, Loader2 } from 'lucide-react';
+import { BedDouble, CreditCard, MessageSquarePlus, Bell, User, Loader2, Info } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import Splash from '../../components/Splash';
+import RoommateMatcher from '../../components/RoommateMatcher';
 
 
 const StatCard = ({ icon, label, value, color, bg }) => (
@@ -38,7 +39,7 @@ const StudentDashboard = () => {
     );
 
     const displayName = student?.full_name || authUser?.user_metadata?.full_name || 'HMS Student';
-    const displayId   = student?.student_id || 'ID Pending...';
+    const displayId   = student?.student_id || authUser?.user_metadata?.student_id || 'ID Pending...';
     const displayRoom = student?.room_number || 'Not Assigned';
     const displayFee  = student?.fee_status || 'Pending';
     const firstName   = displayName.split(' ')[0];
@@ -94,6 +95,16 @@ const StudentDashboard = () => {
                     bg="#FFFBEB"
                 />
             </div>
+
+            {/* Smart Roommate Matcher Section */}
+            {!student?.room_assigned && student?.id && (
+                <RoommateMatcher 
+                    studentId={student.id} 
+                    onMatchAccepted={(roomNum) => {
+                        window.location.reload(); // Quick way to update
+                    }} 
+                />
+            )}
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 20 }}>
                 {/* Notices Card */}

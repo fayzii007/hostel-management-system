@@ -16,7 +16,11 @@ const StudentSignup = () => {
         phone: '', 
         course: '', 
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
+        sleepTime: '',
+        cleanliness: '',
+        studyPreference: '',
+        noiseTolerance: ''
     });
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -53,20 +57,24 @@ const StudentSignup = () => {
                 studentId: form.studentId.trim(), // Using real studentId 📝
                 phone: form.phone.trim(),
                 course: form.course.trim(),
+                sleepTime: form.sleepTime,
+                cleanliness: form.cleanliness,
+                studyPreference: form.studyPreference,
+                noiseTolerance: form.noiseTolerance
             };
 
             const { user } = await signUp(signupData);
 
             if (user) {
                 localStorage.setItem('isStudentAuthenticated', 'true');
-                window.location.href = '/student/dashboard';
+                navigate('/student/dashboard');
             } else {
                 setError('Registration successful! Please login.');
-                setLoading(false);
             }
         } catch (err) {
             console.error('Signup Error:', err);
             setError(err.message || 'Signup failed. Please try again.');
+        } finally {
             setLoading(false);
         }
     };
@@ -82,12 +90,6 @@ const StudentSignup = () => {
 
     return (
         <div className="signup-premium-page">
-            <Aurora
-                colorStops={["#FFFFFF", "#87CEEB", "#FFFFFF"]}
-                blend={0.5}
-                amplitude={1.0}
-                speed={0.5}
-            />
             <div className="signup-premium-container animate-in">
 
                 {/* Left Side - Banner */}
@@ -245,6 +247,59 @@ const StudentSignup = () => {
                                 >
                                     {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                                 </button>
+                            </div>
+                        </div>
+
+                        <div className="form-section-divider">
+                            <span>Roommate Matching Preferences</span>
+                        </div>
+
+                        <div className="form-row">
+                            <div className="form-group">
+                                <label>Sleep Time 😴</label>
+                                <div className="input-wrapper">
+                                    <select name="sleepTime" value={form.sleepTime} onChange={handleChange} className="premium-select">
+                                        <option value="" disabled>Select</option>
+                                        <option value="Early Sleeper">Early Sleeper 🌅</option>
+                                        <option value="Night Owl">Night Owl 🌙</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <label>Cleanliness 🧹</label>
+                                <div className="input-wrapper">
+                                    <select name="cleanliness" value={form.cleanliness} onChange={handleChange} className="premium-select">
+                                        <option value="" disabled>Select</option>
+                                        <option value="Very Clean">Very Clean 🧹</option>
+                                        <option value="Moderate">Moderate 😐</option>
+                                        <option value="Messy">Messy 🙈</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="form-row">
+                            <div className="form-group">
+                                <label>Study Preference 📚</label>
+                                <div className="input-wrapper">
+                                    <select name="studyPreference" value={form.studyPreference} onChange={handleChange} className="premium-select">
+                                        <option value="" disabled>Select</option>
+                                        <option value="Quiet Environment">Quiet Environment 🤫</option>
+                                        <option value="Flexible">Flexible 🤷‍♂️</option>
+                                        <option value="Group Discussion">Group/Discussion 🗣️</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <label>Noise Tolerance 🔊</label>
+                                <div className="input-wrapper">
+                                    <select name="noiseTolerance" value={form.noiseTolerance} onChange={handleChange} className="premium-select">
+                                        <option value="" disabled>Select</option>
+                                        <option value="Low">Low 🔇</option>
+                                        <option value="Medium">Medium 🔉</option>
+                                        <option value="High">High 🔊</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
 

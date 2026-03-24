@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const { getPayments, createPayment, deletePayment } = require('../controllers/paymentController');
+const { getPayments, createOrder, verifyPayment, deletePayment } = require('../controllers/paymentController');
 
-router.route('/').get(getPayments).post(createPayment);
+// All payment routes
+router.route('/create-order').post(createOrder);
+router.route('/verify-payment').post(verifyPayment);
+router.route('/:student_id').get(getPayments);
 router.route('/:id').delete(deletePayment);
 
 module.exports = router;

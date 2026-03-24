@@ -87,7 +87,11 @@ export const AuthProvider = ({ children }) => {
             full_name: creds.fullName,
             student_id: creds.studentId,
             phone: creds.phone,
-            course: creds.course
+            course: creds.course,
+            sleep_time: creds.sleepTime,
+            cleanliness: creds.cleanliness,
+            study_preference: creds.studyPreference,
+            noise_tolerance: creds.noiseTolerance
         }
       }
     });

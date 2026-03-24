@@ -77,6 +77,7 @@ const Students = () => {
                             <th>Name</th>
                             <th>Student ID</th>
                             <th>Portal Status</th>
+                            <th>Lifestyle</th>
                             <th>Phone</th>
                             <th>Room Assignment</th>
                             <th>Actions</th>
@@ -98,6 +99,14 @@ const Students = () => {
                                         ) : (
                                             <span className="badge warning">Waiting for Signup</span>
                                         )}
+                                    </td>
+                                    <td>
+                                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, maxWidth: '180px' }}>
+                                            {[student.sleep_time, student.cleanliness].filter(Boolean).map((p, i) => (
+                                                <span key={i} style={{ fontSize: '0.65rem', background: '#F1F5F9', padding: '2px 6px', borderRadius: '4px', fontWeight: 600 }}>{p}</span>
+                                            ))}
+                                            {student.roommate_id && <span style={{ fontSize: '0.65rem', background: '#EEF2FF', color: '#4F46E5', padding: '2px 6px', borderRadius: '4px', fontWeight: 800 }}>Matched</span>}
+                                        </div>
                                     </td>
                                     <td style={{ color: 'var(--text-muted)' }}>{student.phone}</td>
                                     <td>

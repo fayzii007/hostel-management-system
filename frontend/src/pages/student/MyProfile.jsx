@@ -36,8 +36,19 @@ const MyProfile = () => {
     const fileInputRef = useRef(null);
 
     useEffect(() => {
-        if (student) setDraft(student);
-    }, [student]);
+        if (student) {
+            setDraft(student);
+        } else if (authUser?.user_metadata) {
+            // Fallback to metadata if DB record isn't ready
+            setDraft({
+                full_name: authUser.user_metadata.full_name,
+                student_id: authUser.user_metadata.student_id,
+                phone: authUser.user_metadata.phone,
+                course: authUser.user_metadata.course,
+                email: authUser.email
+            });
+        }
+    }, [student, authUser]);
 
     const handlePhotoChange = (file) => {
         if (!file || !file.type.startsWith('image/')) return;
@@ -82,10 +93,10 @@ const MyProfile = () => {
 
     const displayData = {
         name:      student?.full_name || authUser?.user_metadata?.full_name || 'Student',
-        studentId: student?.student_id || 'ST-XXXX-000',
-        course:    student?.course || 'Not Assigned',
+        studentId: student?.student_id || authUser?.user_metadata?.student_id || 'ST-XXXX-000',
+        course:    student?.course || authUser?.user_metadata?.course || 'Not Assigned',
         email:     student?.email || authUser?.email || 'N/A',
-        phone:     student?.phone || 'N/A',
+        phone:     student?.phone || authUser?.user_metadata?.phone || 'N/A',
         room:      student?.room_number || 'Unassigned',
     };
 

@@ -1,0 +1,227 @@
+.matcher-container {
+    background: #fff;
+    border-radius: 20px;
+    padding: 24px;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+}
+
+.matcher-container.loading, .matcher-container.empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    text-align: center;
+    color: #64748B;
+    gap: 16px;
+}
+
+.empty-icon {
+    width: 64px;
+    height: 64px;
+    background: #F1F5F9;
+    color: #94A3B8;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.refresh-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.refresh-btn:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
+.matcher-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.sparkle-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sparkle-title h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #1E293B;
+}
+
+.sparkle-icon {
+    color: #6366f1;
+}
+
+.compatibility-badge {
+    padding: 6px 14px;
+    border-radius: 99px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.compatibility-badge.high { background: #ECFDF5; color: #059669; }
+.compatibility-badge.medium { background: #EEF2FF; color: #4F46E5; }
+.compatibility-badge.low { background: #FEF3C7; color: #D97706; }
+
+.match-card {
+    background: #F8FAFC;
+    border-radius: 16px;
+    padding: 20px;
+    border: 1px solid #F1F5F9;
+}
+
+.match-user-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.match-avatar {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    color: #fff;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.match-details {
+    flex: 1;
+}
+
+.match-details h4 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1E293B;
+}
+
+.match-details p {
+    margin: 2px 0 0 0;
+    font-size: 0.8rem;
+    color: #64748B;
+}
+
+.match-score {
+    text-align: right;
+}
+
+.score-stars {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 4px;
+    justify-content: flex-end;
+}
+
+.match-score span {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #1E293B;
+}
+
+.preferences-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.pref-tag {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: #fff;
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #475569;
+}
+
+.pref-tag span {
+    color: #334155;
+}
+
+.match-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.accept-btn {
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px;
+    background: #10B981;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 10px -2px rgba(16, 185, 129, 0.3);
+}
+
+.accept-btn:hover:not(:disabled) {
+    background: #059669;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px -3px rgba(16, 185, 129, 0.4);
+}
+
+.decline-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    background: #fff;
+    color: #64748B;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.decline-btn:hover:not(:disabled) {
+    background: #F8FAFC;
+    color: #1E293B;
+    border-color: #CBD5E1;
+}
+
+.match-actions button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none !important;
+}

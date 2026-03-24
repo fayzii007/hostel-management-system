@@ -28,7 +28,6 @@
 .signup-banner {
     flex: 0.8; /* Made banner slightly smaller */
     background: linear-gradient(145deg, #6366f1 0%, #8b5cf6 100%);
-    position: relative;
     padding: 40px; /* Reduced from 60px */
     display: flex;
     flex-direction: column;
@@ -166,6 +165,8 @@
     display: flex;
     flex-direction: column;
     gap: 16px; /* Reduced from 24px */
+    position: relative;
+    z-index: 100;
 }
 
 .form-row {
@@ -313,7 +314,55 @@
 @keyframes spin { to { transform: rotate(360deg); } }
 .spin { animation: spin 0.8s linear infinite; }
 
-/* Responsive */
+/* --- Selectable Cards / Premium Select --- */
+.form-section-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 10px 0;
+}
+
+.form-section-divider span {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #6366f1;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+}
+
+.form-section-divider::after {
+    content: '';
+    height: 1px;
+    background: #e5e7eb;
+    width: 100%;
+}
+
+.premium-select {
+    width: 100%;
+    padding: 11px 14px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.2s;
+    outline: none;
+    /* Removed appearance: none to fix non-responsiveness on some browsers ⚙️ */
+}
+
+.premium-select:focus {
+    outline: none;
+    border-color: #6366f1;
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.premium-select:required:invalid {
+    color: #9ca3af;
+}
+
 @media (max-width: 968px) {
     .signup-premium-container {
         flex-direction: column;
