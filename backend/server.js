@@ -55,10 +55,19 @@ app.get('/api/sync-occupancy', async (req, res) => {
     res.json({ message: 'Room occupancies synced!' });
 });
 
+// Health check for deployment
+app.get('/api/health', (req, res) => {
+    res.json({ status: 'ok', message: 'HMS API is running' });
+});
+
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, async () => {
-    console.log(`Server running on port ${PORT}`);
-    // Auto-sync on server start
-    await syncAllRoomOccupancies();
-});
+// Only listen if not running as a serverless function (optional logic for Vercel)
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, async () => {
+        console.log(`Server running on port ${PORT}`);
+        await syncAllRoomOccupancies();
+    });
+}
+
+module.exports = app;
