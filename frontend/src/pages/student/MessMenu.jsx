@@ -27,7 +27,6 @@ const MessMenu = () => {
                         style={{
                             padding: '8px 16px',
                             borderRadius: 'var(--radius-md)',
-                            border: 'none',
                             cursor: 'pointer',
                             fontWeight: 600,
                             background: selectedDay === day ? 'var(--primary)' : 'var(--surface)',
