@@ -10,6 +10,7 @@ import Students from './pages/Students';
 import Rooms from './pages/Rooms';
 import Complaints from './pages/Complaints';
 import Payments from './pages/Payments';
+import AdminSwaps from './pages/AdminSwaps';
 
 // Components
 import Sidebar from './components/Sidebar';
@@ -25,6 +26,7 @@ import MessMenu from './pages/student/MessMenu';
 import RaiseComplaint from './pages/student/RaiseComplaint';
 import Notices from './pages/student/Notices';
 import MyProfile from './pages/student/MyProfile';
+import RoomExchange from './pages/student/RoomExchange';
 
 // ─── Route Guards ────────────────────────────────────────────────
 const PrivateRoute = () => {
@@ -65,13 +67,19 @@ const AdminLayout = () => (
 
 const StudentLayout = () => {
   const { student, authUser } = useAuth();
-  const [photo, setPhoto] = React.useState(() => localStorage.getItem('studentPhoto') || null);
+  const [photo, setPhoto] = React.useState(null);
 
   React.useEffect(() => {
-    const syncPhoto = () => setPhoto(localStorage.getItem('studentPhoto') || null);
+    // ⚡ SYNC: Load photo from DB if available
+    if (student?.avatar_url) setPhoto(student.avatar_url);
+    
+    const syncPhoto = () => {
+      if (student?.avatar_url) setPhoto(student.avatar_url);
+      else setPhoto(localStorage.getItem('studentPhoto'));
+    };
     window.addEventListener('storage', syncPhoto);
     return () => window.removeEventListener('storage', syncPhoto);
-  }, []);
+  }, [student]);
 
   // Use metadata as fallback if the DB row hasn't arrived yet
   const studentName = student?.full_name || authUser?.user_metadata?.full_name || 'HMS Student';
@@ -137,6 +145,7 @@ function App() {
               <Route path="/rooms" element={<Rooms />} />
               <Route path="/complaints" element={<Complaints />} />
               <Route path="/payments" element={<Payments />} />
+              <Route path="/swaps" element={<AdminSwaps />} />
             </Route>
           </Route>
 
@@ -150,6 +159,7 @@ function App() {
               <Route path="/student/complaint" element={<RaiseComplaint />} />
               <Route path="/student/notices" element={<Notices />} />
               <Route path="/student/profile" element={<MyProfile />} />
+              <Route path="/student/exchange" element={<RoomExchange />} />
             </Route>
           </Route>
 

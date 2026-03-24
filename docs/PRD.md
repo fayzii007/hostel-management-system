@@ -1,153 +1,67 @@
-# Product Requirement Document (PRD)
-## Hostel Management System
+# Product Requirement Document (PRD): HMS Pro
+## Premium Hostel Management System with AI Matching
 
-## 1. Product Overview
-The Hostel Management System is a web application designed to help hostel administrators manage students, rooms, payments, and complaints through a centralized digital platform.
-
-The system replaces manual record keeping and simplifies hostel operations.
+### 1. Product Overview
+HMS Pro is a state-of-the-art Hostel Management System designed to modernize hostel living through intelligent automation and a premium user experience. Unlike traditional systems, HMS Pro focuses on student satisfaction by integrating AI-driven roommate matching and secure peer-to-peer room exchanges.
 
 ---
 
-## 2. Problem Statement
-
-Hostels often manage records manually using spreadsheets or paper records. This leads to several problems:
-
-- Difficulty tracking room availability
-- Inefficient student registration
-- Poor complaint management
-- Difficult payment tracking
-- Lack of centralized data
-
-The Hostel Management System solves these problems by digitizing hostel operations.
+### 2. Objectives
+*   **Intelligent Living**: Match students based on compatible lifestyle habits to reduce conflicts.
+*   **Social Flexibility**: Enable secure, mutual room swaps without administrative bottlenecks.
+*   **Operational Excellence**: Automate room occupancy, payment tracking, and complaint resolution.
+*   **Premium Experience**: Provide a modern, responsive, and aesthetically pleasing interface for both students and admins.
 
 ---
 
-## 3. Objectives
+### 3. Core Features
 
-The main objectives of the system are:
+#### 🛡️ Authentication & Profiles
+*   **Secure Student Signup**: Comprehensive onboarding collecting academic data and **Lifestyle Preferences** (Sleep Time, Cleanliness, Study habits, Noise tolerance).
+*   **Role-Based Access**: Specialized portals for Students and Administrators.
 
-- Automate hostel management processes
-- Improve record tracking
-- Reduce manual administrative work
-- Provide better transparency for students and administrators
+#### 🤖 Smart Roommate Matching
+*   **Compatibility Engine**: 4-point scoring algorithm that automatically suggests roommates with similar lifestyles.
+*   **One-Click Assignment**: Automated room allocation for matched pairs to streamline the move-in process.
+*   **Visual Compatibility**: Interactive dashboard showing match percentages and shared traits.
 
----
+#### 🔁 Room Exchange Hub (Mutual Swap)
+*   **Peer Discovery**: Students can toggle their "Swap Interest" to find other students looking for a new room.
+*   **Request Workflow**: Secure peer-to-peer notification system for sending and receiving swap requests.
+*   **Atomic Swapping**: Instant database-level room exchange upon mutual agreement, ensuring data consistency and updated occupancy records.
+*   **AI Swap Suggestions**: AI-powered recommendations for the best students to swap with based on life-style improvements.
 
-## 4. Target Users
-
-### Admin
-Responsible for managing hostel operations.
-
-Capabilities:
-- Manage student records
-- Allocate rooms
-- Track payments
-- Resolve complaints
-
-### Student
-Hostel resident using the system.
-
-Capabilities:
-- View room information
-- Submit complaints
-- View payment status
+#### 💰 Financial & Operations
+*   **Razorpay Integration**: Seamless online payment gateway for hostel fees.
+*   **Real-time Occupancy**: Dynamic room vacancy tracking as students move or swap rooms.
+*   **Complaint System**: Interactive ticketing system with status tracking (Pending → In Progress → Resolved).
 
 ---
 
-## 5. Core Features
-
-### Authentication
-- Secure login system
-- Role-based access control
-
-### Student Management
-- Add student
-- Update student information
-- Delete student record
-- View student list
-
-### Room Management
-- Add hostel rooms
-- Track room availability
-- Assign rooms to students
-
-### Complaint Management
-- Students can submit complaints
-- Admin can update complaint status
-- Complaint tracking system
-
-### Fee Management
-- Track hostel fee payments
-- View payment history
-- Check pending payments
+### 4. System Logic & Rules
+*   **Mutual Consent**: Room swaps only occur when both students explicitly "Accept" the request.
+*   **Atomic Consistency**: During a swap, the system resets roommate IDs to prevent "ghost roommates" and triggers an occupancy sync for both old and new rooms.
+*   **Matching Thresholds**: Strong matches require a minimum score of 3/4 (75% compatibility) to ensure high-quality suggestions.
 
 ---
 
-## 6. System Workflow
-
-### Student Registration
-Admin registers student → room assigned → student added to system.
-
-### Complaint Handling
-Student submits complaint → admin reviews → status updated → issue resolved.
-
-### Fee Management
-Admin records payment → system updates payment history.
+### 5. UI/UX Pillars
+*   **Modern Aesthetics**: Dark-mode support, glassmorphism elements, and vibrant, harmonious color palettes.
+*   **Interactive Data**: Circular charts for compatibility, dynamic badges for status, and smooth micro-animations.
+*   **Responsive Design**: Optimized for desktop and mobile access.
 
 ---
 
-## 7. Functional Requirements
-
-The system should allow:
-
-1. Admin to manage student records.
-2. Admin to create and manage rooms.
-3. Admin to allocate rooms to students.
-4. Students to submit complaints.
-5. Admin to manage complaint status.
-6. Admin to track fee payments.
+### 6. Technical Stack
+*   **Frontend**: React.js with Lucide Icons and custom Vanilla CSS design system.
+*   **Backend**: Node.js & Express.
+*   **Database**: Supabase (PostgreSQL) with Real-time triggers.
+*   **Payments**: Razorpay API.
+*   **Auth**: Supabase Auth (Email/Username based).
 
 ---
 
-## 8. Non-Functional Requirements
-
-### Performance
-System should support multiple users.
-
-### Security
-Role-based authentication.
-
-### Usability
-Simple and easy interface.
-
-### Reliability
-Secure database storage.
-
----
-
-## 9. Proposed Tech Stack
-
-Frontend
-- React
-
-Backend
-- Node.js
-- Express
-
-Database
-- supabase
-
-Version Control
-- Git
-
-Repository
-- GitHub
-
----
-
-## 10. Future Improvements
-
-- Mobile application
-- Online payment integration
-- Visitor management system
-- Notification system
+### 7. Future Roadmap
+*   **AI Insights**: Predictive maintenance for complaints.
+*   **Digital Keys**: Integration with smart locks for room access.
+*   **Community Feed**: Student-only social announcements and event coordination.

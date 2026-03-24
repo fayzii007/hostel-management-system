@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import {
     LayoutDashboard, BedDouble, CreditCard, Utensils,
-    MessageSquarePlus, Bell, User, LogOut
+    MessageSquarePlus, Bell, User, LogOut, ArrowRightLeft
 } from 'lucide-react';
 
 const StudentSidebar = () => {
@@ -22,6 +22,7 @@ const StudentSidebar = () => {
         { to: '/student/complaint', icon: <MessageSquarePlus size={20} />, label: 'Raise Complaint' },
         { to: '/student/notices', icon: <Bell size={20} />, label: 'Notices' },
         { to: '/student/profile', icon: <User size={20} />, label: 'My Profile' },
+        { to: '/student/exchange', icon: <ArrowRightLeft size={20} />, label: 'Room Exchange' },
     ];
 
     return (

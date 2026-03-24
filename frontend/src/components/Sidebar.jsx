@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Home, Users, BedDouble, AlertCircle, CreditCard, LogOut } from 'lucide-react';
+import { Home, Users, BedDouble, AlertCircle, CreditCard, LogOut, ArrowRightLeft } from 'lucide-react';
 
 const Sidebar = () => {
     const handleLogout = () => {
@@ -34,6 +34,10 @@ const Sidebar = () => {
                 <NavLink to="/payments" className={({ isActive }) => (isActive ? 'nav-item active' : 'nav-item')}>
                     <CreditCard size={20} />
                     <span>Payments</span>
+                </NavLink>
+                <NavLink to="/swaps" className={({ isActive }) => (isActive ? 'nav-item active' : 'nav-item')}>
+                    <ArrowRightLeft size={20} />
+                    <span>Room Swaps</span>
                 </NavLink>
             </nav>
 

@@ -1,113 +1,86 @@
-# Hostel Management System (HMS)
+# 🏨 HMS Pro: AI-Powered Hostel Management System
 
-A modern, production-ready web application for hostel management built with React, Node.js, Express, and Supabase (PostgreSQL).
+**HMS Pro** is a premium, full-stack hostel management solution that leverages AI matching and secure mutual exchanges to redefine student living. Built for performance and aesthetics, it streamlines operations for administrators while providing students with a high-end, interactive portal.
 
-## Project Structure
+---
 
-- `frontend/` — React application using functional components, hooks, Vite, and React Router.
-- `backend/` — Node.js and Express RESTful API, connected to a Supabase (PostgreSQL) database.
-- `backend/database.sql` — SQL script to create the required tables in Supabase.
+## ✨ Key Innovation Features
 
-## Tech Stack
+### 🤖 Smart Roommate Matching
+*   **AI Compatibility Scoring**: Students are matched based on a 4-point lifestyle algorithm (Sleep, Cleanliness, Study, Noise).
+*   **Real-time Recommendations**: Instant suggestions of the best potential roommates with percentage-based compatibility scores.
 
-- **Frontend**: React, React Router, Vite, Lucide Icons
-- **Backend**: Node.js, Express.js
-- **Database**: Supabase (PostgreSQL)
-- **Auth / Hosting**: Supabase
+### 🔁 Mutual Room Exchange Hub
+*   **Peer-to-Peer Swapping**: Secure system for students to find swap candidates and exchange rooms instantly.
+*   **AI Auto-Suggest**: Smart recommendations for the best students to swap with to improve lifestyle harmony.
+*   **Mutual Consent Workflow**: Automated atomic swaps once both students accept the request.
 
-## Environment Variables
+### 🍱 Premium Student Experience
+*   **Dynamic Dashboard**: Real-time stats on Room, Fee, and Complaints.
+*   **SaaS Aesthetic**: Modern UI with glassmorphism, animations, and high-quality data visualizations.
+*   **Integrated Payments**: Secure fee payments via Razorpay.
 
-### Backend (`backend/.env`)
+---
 
-```env
-PORT=5000
-SUPABASE_URL=https://your-project-id.supabase.co
-SUPABASE_KEY=your-supabase-service-role-key
-```
+## 🛠️ Tech Stack
 
-### Frontend (`frontend/.env`)
+*   **Frontend**: React.js 18, Vite, React Router, Lucide Icons, Vanilla CSS Design System.
+*   **Backend**: Node.js, Express.js.
+*   **Database**: Supabase (PostgreSQL) with Real-time triggers.
+*   **Payment Gateway**: Razorpay.
+*   **Auth**: Supabase Auth (Unified Student/Admin login).
 
-```env
-VITE_SUPABASE_URL=https://your-project-id.supabase.co
-VITE_SUPABASE_ANON_KEY=your-supabase-anon-key
-```
+---
 
-## Database Setup
-
-1. Go to your [Supabase Dashboard](https://supabase.com/dashboard).
-2. Open your project → SQL Editor → New Query.
-3. Copy the contents of `backend/database.sql` and click **Run**.
-   This will create the `students`, `rooms`, `complaints`, and `payments` tables.
-
-## How to Run
+## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js v18+
-- A Supabase project (free tier works fine)
+*   Node.js v18+
+*   Supabase Project
 
-### Backend
+### Quick Setup
 
-1. Navigate to the backend folder:
-   ```bash
-   cd backend
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Create a `.env` file (see [Environment Variables](#environment-variables) above) and add your Supabase credentials.
-4. Start the server:
-   ```bash
-   npm run dev
-   ```
-   The backend API will run on `http://localhost:5000`.
+1.  **Clone & Install**:
+    ```bash
+    git clone https://github.com/fayzii007/hostel-management-system.git
+    cd hostel-management-system
+    cd backend && npm install
+    cd ../frontend && npm install
+    ```
 
-### Frontend
+2.  **Database Migration**:
+    *   Initialize the core schema using `backend/database.sql`.
+    *   Apply AI/Match features using `backend/roommate_matching.sql`.
+    *   Apply Room Swap features using `backend/room_swap.sql`.
 
-1. Navigate to the frontend folder:
-   ```bash
-   cd frontend
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
-   The frontend will run on `http://localhost:5173`.
+3.  **Environment Configuration**:
+    Configure `.env` files in both `frontend` and `backend` with your Supabase credentials.
 
-## Login Credentials
+4.  **Run Development**:
+    *   Backend: `cd backend && npm run dev`
+    *   Frontend: `cd frontend && npm run dev`
 
-> These are hardcoded for demonstration purposes.
+---
 
-- **Username**: `user123`
-- **Password**: `impelsys@123`
+## 🔑 Demo Access
 
-## API Endpoints
+### Student Login
+*   **Username**: `user123`
+*   **Password**: `impelsys@123`
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/students` | Get all students |
-| POST | `/api/students` | Add a new student |
-| PUT | `/api/students/:id` | Update a student |
-| DELETE | `/api/students/:id` | Delete a student |
-| GET | `/api/rooms` | Get all rooms |
-| POST | `/api/rooms` | Add a new room |
-| PUT | `/api/rooms/:id` | Update a room |
-| DELETE | `/api/rooms/:id` | Delete a room |
-| GET | `/api/complaints` | Get all complaints |
-| POST | `/api/complaints` | Add a new complaint |
-| PUT | `/api/complaints/:id` | Update complaint status |
-| DELETE | `/api/complaints/:id` | Delete a complaint |
-| GET | `/api/payments` | Get all payments |
-| POST | `/api/payments` | Record a payment |
-| DELETE | `/api/payments/:id` | Delete a payment |
+### Features to Explore
+1.  **Dashboard**: View your room and compatible roommates.
+2.  **Room Exchange**: Toggle "I want to Swap" and see AI suggestions.
+3.  **My Room**: View detailed roommate profiles and shared habits.
 
+---
 
+## 📈 Roadmap
+*   [x] AI Roommate Matching
+*   [x] Mutual Room Exchange
+*   [x] Online Payments (Razorpay)
+*   [ ] Mobile App (PWA)
+*   [ ] Visitor QR-code Entrance System
 
-   Login Credentials:
-   Username: user123
-   Password: impelsys@123
-   
+---
+Managed by **HMS Pro Operations Team**. 🚀

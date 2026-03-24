@@ -32,14 +32,14 @@ const MyProfile = () => {
     const [editing, setEditing] = useState(false);
     const [loading, setLoading] = useState(false);
     const [saved, setSaved] = useState(false);
-    const [photo, setPhoto] = useState(() => localStorage.getItem('studentPhoto') || null);
+    const [photo, setPhoto] = useState(null);
     const fileInputRef = useRef(null);
 
     useEffect(() => {
         if (student) {
             setDraft(student);
+            if (student.avatar_url) setPhoto(student.avatar_url);
         } else if (authUser?.user_metadata) {
-            // Fallback to metadata if DB record isn't ready
             setDraft({
                 full_name: authUser.user_metadata.full_name,
                 student_id: authUser.user_metadata.student_id,
@@ -50,14 +50,26 @@ const MyProfile = () => {
         }
     }, [student, authUser]);
 
-    const handlePhotoChange = (file) => {
+    const handlePhotoChange = async (file) => {
         if (!file || !file.type.startsWith('image/')) return;
+        
         const reader = new FileReader();
-        reader.onload = (e) => {
+        reader.onload = async (e) => {
             const dataUrl = e.target.result;
             setPhoto(dataUrl);
-            localStorage.setItem('studentPhoto', dataUrl);
-            window.dispatchEvent(new Event('storage'));
+            
+            try {
+                const { error } = await supabase
+                    .from('students')
+                    .update({ avatar_url: dataUrl })
+                    .eq('id', student.id);
+                
+                if (error) throw error;
+                // Trigger global update
+                window.dispatchEvent(new Event('storage'));
+            } catch (err) {
+                console.error('Photo update failed:', err);
+            }
         };
         reader.readAsDataURL(file);
     };
