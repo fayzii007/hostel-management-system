@@ -101,7 +101,9 @@ const StudentLayout = () => {
       <div className="main-content">
         <div className="student-top-bar" style={{
           height: 72,
-          background: 'var(--surface)',
+          background: 'rgba(255, 255, 255, 0.9)',
+          backdropFilter: 'blur(12px)',
+          WebkitBackdropFilter: 'blur(12px)',
           borderBottom: '1px solid var(--border)',
           display: 'flex',
           justifyContent: 'space-between',
@@ -109,7 +111,8 @@ const StudentLayout = () => {
           padding: '0 40px',
           position: 'sticky',
           top: 0,
-          zIndex: 40,
+          zIndex: 100,
+          flexShrink: 0,
         }}>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <button className="mobile-menu-btn" onClick={() => setSidebarOpen(true)}>

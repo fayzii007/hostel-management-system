@@ -117,32 +117,61 @@ const StudentDashboard = () => {
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 20 }}>
                 {/* Notices Card */}
-                <div style={{ background: '#fff', borderRadius: '16px', padding: 24, border: '1px solid #E2E8F0', boxShadow: 'var(--shadow-sm)' }}>
+                <div style={{
+                    background: '#fff',
+                    borderRadius: 'var(--radius-xl)',
+                    padding: 24,
+                    border: '1px solid var(--border)',
+                    boxShadow: 'var(--shadow-sm)',
+                    transition: 'var(--transition-spring)',
+                    cursor: 'default',
+                }}
+                onMouseEnter={e => { e.currentTarget.style.boxShadow = 'var(--shadow-card-hover)'; e.currentTarget.style.transform = 'translateY(-3px)'; }}
+                onMouseLeave={e => { e.currentTarget.style.boxShadow = 'var(--shadow-sm)'; e.currentTarget.style.transform = 'translateY(0)'; }}
+                >
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
-                        <Bell size={18} color="var(--primary)" />
-                        <h3 style={{ margin: 0, fontSize: '0.95rem', fontWeight: 800 }}>Recent Announcements</h3>
+                        <div style={{ width: 32, height: 32, borderRadius: 10, background: 'linear-gradient(135deg, #5B5FED, #7C3AED)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <Bell size={16} color="#fff" />
+                        </div>
+                        <h3 style={{ margin: 0, fontSize: '1rem', fontWeight: 800, letterSpacing: '-0.3px' }}>Recent Announcements</h3>
                     </div>
                     {[
-                        { title: 'New Laundry Policy', date: 'Mar 18' },
-                        { title: 'Late Entry Permission', date: 'Mar 17' },
-                        { title: 'Weekly Mess Change', date: 'Mar 15' },
+                        { title: 'New Laundry Policy', date: 'Mar 18', dot: '#5B5FED' },
+                        { title: 'Late Entry Permission', date: 'Mar 17', dot: '#10b981' },
+                        { title: 'Weekly Mess Change', date: 'Mar 15', dot: '#D97706' },
                     ].map((n, i) => (
-                        <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 0', borderBottom: i < 2 ? '1px solid #F1F5F9' : 'none' }}>
-                            <p style={{ margin: 0, fontSize: '0.875rem', fontWeight: 500 }}>{n.title}</p>
-                            <span style={{ fontSize: '0.75rem', color: '#94A3B8' }}>{n.date}</span>
+                        <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 0', borderBottom: i < 2 ? '1px solid var(--border-light)' : 'none' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                                <div style={{ width: 7, height: 7, borderRadius: '50%', background: n.dot, flexShrink: 0 }} />
+                                <p style={{ margin: 0, fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-soft)' }}>{n.title}</p>
+                            </div>
+                            <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', background: 'var(--background)', padding: '3px 8px', borderRadius: 99, fontWeight: 600 }}>{n.date}</span>
                         </div>
                     ))}
                 </div>
 
                 {/* Profile Card Summary */}
-                <div style={{ background: '#fff', borderRadius: '16px', padding: 24, border: '1px solid #E2E8F0', boxShadow: 'var(--shadow-sm)' }}>
+                <div style={{
+                    background: '#fff',
+                    borderRadius: 'var(--radius-xl)',
+                    padding: 24,
+                    border: '1px solid var(--border)',
+                    boxShadow: 'var(--shadow-sm)',
+                    transition: 'var(--transition-spring)',
+                    cursor: 'default',
+                }}
+                onMouseEnter={e => { e.currentTarget.style.boxShadow = 'var(--shadow-card-hover)'; e.currentTarget.style.transform = 'translateY(-3px)'; }}
+                onMouseLeave={e => { e.currentTarget.style.boxShadow = 'var(--shadow-sm)'; e.currentTarget.style.transform = 'translateY(0)'; }}
+                >
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
-                        <User size={18} color="var(--primary)" />
-                        <h3 style={{ margin: 0, fontSize: '0.95rem', fontWeight: 800 }}>Quick Profile</h3>
+                        <div style={{ width: 32, height: 32, borderRadius: 10, background: 'linear-gradient(135deg, #059669, #10b981)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <User size={16} color="#fff" />
+                        </div>
+                        <h3 style={{ margin: 0, fontSize: '1rem', fontWeight: 800, letterSpacing: '-0.3px' }}>Quick Profile</h3>
                     </div>
                     {loading ? (
                         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-                            <Skeleton width="44px" height="44px" borderRadius="50%" />
+                            <Skeleton width="52px" height="52px" borderRadius="50%" />
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                                 <Skeleton width="120px" height="16px" />
                                 <Skeleton width="80px" height="12px" />
@@ -150,12 +179,15 @@ const StudentDashboard = () => {
                         </div>
                     ) : (
                         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-                            <div style={{ width: 44, height: 44, background: 'linear-gradient(135deg, #4F46E5, #7C3AED)', borderRadius: '50%', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800 }}>
+                            <div style={{ width: 52, height: 52, background: 'linear-gradient(135deg, #5B5FED, #7C3AED)', borderRadius: '50%', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: '1.1rem', flexShrink: 0, boxShadow: '0 4px 14px rgba(91,95,237,0.3)' }}>
                                 {displayName[0]}
                             </div>
                             <div>
-                                <p style={{ margin: 0, fontSize: '0.9rem', fontWeight: 700 }}>{displayName}</p>
-                                <p style={{ margin: 0, fontSize: '0.75rem', color: '#64748B' }}>{student?.course || authUser?.email || 'Student Account'}</p>
+                                <p style={{ margin: 0, fontSize: '1rem', fontWeight: 800, letterSpacing: '-0.3px', color: 'var(--text-main)' }}>{displayName}</p>
+                                <p style={{ margin: '4px 0 0', fontSize: '0.78rem', color: 'var(--text-muted)', fontWeight: 500 }}>{student?.course || authUser?.email || 'Student Account'}</p>
+                                <span style={{ display: 'inline-block', marginTop: 8, fontSize: '0.72rem', fontWeight: 700, color: 'var(--primary)', background: 'var(--primary-light)', borderRadius: 99, padding: '3px 10px' }}>
+                                    Active Student
+                                </span>
                             </div>
                         </div>
                     )}
