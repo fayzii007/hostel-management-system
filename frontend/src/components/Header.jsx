@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Bell, Search, User, LogOut, Mail, Settings, ShieldCheck } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import LogoutModal from './LogoutModal';
 
 const Header = ({ onMenuClick }) => {
     const location = useLocation();
@@ -15,6 +16,7 @@ const Header = ({ onMenuClick }) => {
     const [isNotificationOpen, setIsNotificationOpen] = useState(false);
     const [isProfileOpen, setIsProfileOpen] = useState(false);
     const [isSearchFocused, setIsSearchFocused] = useState(false);
+    const [showLogoutModal, setShowLogoutModal] = useState(false);
 
     const notificationRef = useRef(null);
     const profileRef = useRef(null);
@@ -40,7 +42,15 @@ const Header = ({ onMenuClick }) => {
     };
 
     const handleSearch = (e) => setSearchQuery(e.target.value);
-    const handleLogout = async () => {
+    
+    const handleLogoutClick = () => {
+        setIsProfileOpen(false);
+        setShowLogoutModal(true);
+    };
+
+    const confirmLogout = async () => {
+        setShowLogoutModal(false);
+        localStorage.removeItem('isAuthenticated');
         await signOut();
         navigate('/login');
     };
@@ -197,7 +207,7 @@ const Header = ({ onMenuClick }) => {
                                     <Settings size={18} style={{ color: '#6366F1' }} /> Settings
                                 </button>
                                 <div style={{ height: '1px', background: '#F1F5F9', margin: '8px 0' }} />
-                                <button onClick={handleLogout} style={{ width: '100%', padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 12, background: 'transparent', border: 'none', borderRadius: '12px', cursor: 'pointer', textAlign: 'left', fontWeight: 600, color: '#EF4444' }} onMouseEnter={e => e.currentTarget.style.background = '#FEF2F2'} onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
+                                <button onClick={handleLogoutClick} style={{ width: '100%', padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 12, background: 'transparent', border: 'none', borderRadius: '12px', cursor: 'pointer', textAlign: 'left', fontWeight: 600, color: '#EF4444' }} onMouseEnter={e => e.currentTarget.style.background = '#FEF2F2'} onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
                                     <LogOut size={18} /> Logout Session
                                 </button>
                             </div>
@@ -206,6 +216,12 @@ const Header = ({ onMenuClick }) => {
                 </div>
             </div>
             
+            <LogoutModal 
+                isOpen={showLogoutModal} 
+                onClose={() => setShowLogoutModal(false)}
+                onConfirm={confirmLogout}
+            />
+
             <style>{`
                 @keyframes slideIn {
                     from { transform: translateY(-10px); opacity: 0; }
