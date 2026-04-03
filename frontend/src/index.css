@@ -869,4 +869,62 @@ tbody tr:last-child td {
     align-items: center;
     justify-content: center;
   }
+
+  /* --- Complaint Specific Mobile Fixes --- */
+  .complaints-mobile-grid {
+    display: none;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 10px;
+  }
+
+  /* When we want to force show/hide */
+  .hide-on-mobile {
+    display: none !important;
+  }
+  .show-on-mobile {
+    display: flex !important;
+  }
+  
+  .complaints-mobile-grid.active {
+     display: flex;
+  }
+
+  .complaint-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+  }
+
+  .complaint-card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary);
+  }
+
+  .complaint-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
+
+  .complaint-card-desc {
+    font-size: 0.95rem;
+    color: var(--text-soft);
+    line-height: 1.6;
+    margin-bottom: 18px;
+    word-break: break-word;
+    font-weight: 500;
+  }
+
+  .complaint-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    border-top: 1px dashed var(--border);
+  }
 }
