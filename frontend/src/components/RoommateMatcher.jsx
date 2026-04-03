@@ -12,7 +12,8 @@ const RoommateMatcher = ({ studentId, onMatchAccepted }) => {
         setLoading(true);
         setError(null);
         try {
-            const response = await fetch(`http://localhost:5000/api/students/find-match/${studentId}`);
+            const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
+            const response = await fetch(`${baseUrl}/students/find-match/${studentId}`);
             const data = await response.json();
             if (data.found) {
                 setMatch(data.match);
@@ -35,7 +36,8 @@ const RoommateMatcher = ({ studentId, onMatchAccepted }) => {
         if (!match) return;
         setAccepting(true);
         try {
-            const response = await fetch('http://localhost:5000/api/students/accept-match', {
+            const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
+            const response = await fetch(`${baseUrl}/students/accept-match`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
