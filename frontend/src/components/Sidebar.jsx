@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Home, Users, BedDouble, AlertCircle, CreditCard, LogOut, ArrowRightLeft, X } from 'lucide-react';
+import { Home, Users, BedDouble, AlertCircle, CreditCard, LogOut, ArrowRightLeft, X, MapPin } from 'lucide-react';
 import LogoutModal from './LogoutModal';
 
 const Sidebar = ({ isOpen, onClose }) => {
@@ -49,6 +49,10 @@ const Sidebar = ({ isOpen, onClose }) => {
                 <NavLink to="/swaps" onClick={onClose} className={({ isActive }) => (isActive ? 'nav-item active' : 'nav-item')}>
                     <ArrowRightLeft size={20} />
                     <span>Room Swaps</span>
+                </NavLink>
+                <NavLink to="/leave-requests" onClick={onClose} className={({ isActive }) => (isActive ? 'nav-item active' : 'nav-item')}>
+                    <MapPin size={20} />
+                    <span>Gate Passes</span>
                 </NavLink>
             </nav>
 

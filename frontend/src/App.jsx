@@ -16,6 +16,7 @@ import AdminSwaps from './pages/AdminSwaps';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import StudentSidebar from './components/StudentSidebar';
+import LeaveRequests from './pages/LeaveRequests';
 
 // Student pages
 import StudentSignup from './pages/student/StudentSignup';
@@ -27,6 +28,7 @@ import RaiseComplaint from './pages/student/RaiseComplaint';
 import Notices from './pages/student/Notices';
 import MyProfile from './pages/student/MyProfile';
 import RoomExchange from './pages/student/RoomExchange';
+import LeaveGatePass from './pages/student/LeaveGatePass';
 
 // ─── Route Guards ────────────────────────────────────────────────
 const PrivateRoute = () => {
@@ -164,6 +166,7 @@ function App() {
               <Route path="/complaints" element={<Complaints />} />
               <Route path="/payments" element={<Payments />} />
               <Route path="/swaps" element={<AdminSwaps />} />
+              <Route path="/leave-requests" element={<LeaveRequests />} />
             </Route>
           </Route>
 
@@ -178,6 +181,7 @@ function App() {
               <Route path="/student/notices" element={<Notices />} />
               <Route path="/student/profile" element={<MyProfile />} />
               <Route path="/student/exchange" element={<RoomExchange />} />
+              <Route path="/student/leave" element={<LeaveGatePass />} />
             </Route>
           </Route>
 

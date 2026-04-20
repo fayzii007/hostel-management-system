@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { BedDouble, CreditCard, MessageSquarePlus, Bell, User, Loader2, Info } from 'lucide-react';
+import { BedDouble, CreditCard, MessageSquarePlus, Bell, User, Users, Loader2, Info } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import Splash from '../../components/Splash';
 import RoommateMatcher from '../../components/RoommateMatcher';

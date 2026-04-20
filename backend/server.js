@@ -10,6 +10,7 @@ const roomRoutes = require('./routes/roomRoutes');
 const complaintRoutes = require('./routes/complaintRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 const swapRoutes = require('./routes/swapRoutes');
+const leaveRoutes = require('./routes/leaveRoutes'); // New 🔥
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use('/api/rooms', roomRoutes);
 app.use('/api/complaints', complaintRoutes);
 app.use('/api/payments', paymentRoutes);
 app.use('/api/swap', swapRoutes);
+app.use('/api/leaves', leaveRoutes); // New 🔥
 
 // Sync all room occupancies based on current student assignments
 const syncAllRoomOccupancies = async () => {

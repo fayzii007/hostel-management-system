@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import {
     LayoutDashboard, BedDouble, CreditCard, Utensils,
-    MessageSquarePlus, Bell, User, LogOut, ArrowRightLeft, X
+    MessageSquarePlus, Bell, User, LogOut, ArrowRightLeft, X, MapPin
 } from 'lucide-react';
 import LogoutModal from './LogoutModal';
 
@@ -29,6 +29,7 @@ const StudentSidebar = ({ isOpen, onClose }) => {
         { to: '/student/notices', icon: <Bell size={20} />, label: 'Notices' },
         { to: '/student/profile', icon: <User size={20} />, label: 'My Profile' },
         { to: '/student/exchange', icon: <ArrowRightLeft size={20} />, label: 'Room Exchange' },
+        { to: '/student/leave', icon: <MapPin size={20} />, label: 'Gate Pass' },
     ];
 
     return (
