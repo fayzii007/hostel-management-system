@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Sparkles, Check, X, RotateCcw, User, Star, Loader2, Info } from 'lucide-react';
+import api from '../services/api';
 import './RoommateMatcher.css';
 
 const RoommateMatcher = ({ studentId, onMatchAccepted }) => {
@@ -12,9 +13,8 @@ const RoommateMatcher = ({ studentId, onMatchAccepted }) => {
         setLoading(true);
         setError(null);
         try {
-            const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
-            const response = await fetch(`${baseUrl}/students/find-match/${studentId}`);
-            const data = await response.json();
+            const response = await api.get(`/students/find-match/${studentId}`);
+            const data = response.data;
             if (data.found) {
                 setMatch(data.match);
             } else {
@@ -36,17 +36,12 @@ const RoommateMatcher = ({ studentId, onMatchAccepted }) => {
         if (!match) return;
         setAccepting(true);
         try {
-            const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
-            const response = await fetch(`${baseUrl}/students/accept-match`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    studentId,
-                    roommateId: match.id
-                })
+            const response = await api.post('/students/accept-match', {
+                studentId,
+                roommateId: match.id
             });
-            const data = await response.json();
-            if (response.ok) {
+            const data = response.data;
+            if (response.status === 200) {
                 onMatchAccepted(data.room_number);
             } else {
                 alert(data.message);
