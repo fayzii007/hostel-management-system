@@ -12,10 +12,11 @@ const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [error,        setError]        = useState('');
     const [loading,      setLoading]      = useState(false);
+    const [isReadOnly,   setIsReadOnly]   = useState(true);
     const navigate  = useNavigate();
     const { signIn } = useAuth();
 
-    const resetForm = () => { setIdentifier(''); setPassword(''); setError(''); setLoading(false); };
+    const resetForm = () => { setIdentifier(''); setPassword(''); setError(''); setLoading(false); setIsReadOnly(true); };
 
     /* ─── Admin login (static/hardcoded for now) ──────────────────── */
     const handleAdminLogin = (e) => {
@@ -90,9 +91,13 @@ const Login = () => {
                         <input
                             type={activeTab === 'admin' ? "text" : "email"}
                             id="identifier"
-                            placeholder={activeTab === 'admin' ? 'Enter admin username' : 'Enter your email'}
+                            name="identifier"
+                            placeholder={activeTab === 'admin' ? 'Enter admin user ID' : 'Enter your email'}
                             value={identifier}
                             onChange={(e) => { setIdentifier(e.target.value); setError(''); }}
+                            readOnly={isReadOnly}
+                            onFocus={() => setIsReadOnly(false)}
+                            autoComplete="username"
                             required
                         />
                     </div>
@@ -103,9 +108,13 @@ const Login = () => {
                             <input
                                 type={showPassword ? 'text' : 'password'}
                                 id="password"
+                                name="password"
                                 placeholder="Enter password"
                                 value={password}
                                 onChange={(e) => { setPassword(e.target.value); setError(''); }}
+                                readOnly={isReadOnly}
+                                onFocus={() => setIsReadOnly(false)}
+                                autoComplete="current-password"
                                 required
                             />
                             <button

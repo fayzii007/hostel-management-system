@@ -13,16 +13,28 @@ CREATE TABLE IF NOT EXISTS leave_requests (
 -- 2. Enable Row Level Security (RLS)
 ALTER TABLE leave_requests ENABLE ROW LEVEL SECURITY;
 
+-- Drop existing policies if any
+DROP POLICY IF EXISTS "Students can insert their own leaves" ON leave_requests;
+DROP POLICY IF EXISTS "Students can view their own leaves" ON leave_requests;
+
 -- 3. Policy: Allow students to insert their own leaves ONLY
 CREATE POLICY "Students can insert their own leaves" 
 ON leave_requests FOR INSERT 
 WITH CHECK (
-    auth.uid()::text = (SELECT auth_user_id::text FROM students WHERE students.id::text = student_id::text)
+    EXISTS (
+        SELECT 1 FROM students 
+        WHERE students.id = leave_requests.student_id 
+        AND students.auth_user_id = auth.uid()
+    )
 );
 
 -- 4. Policy: Allow students to view their own leaves ONLY
 CREATE POLICY "Students can view their own leaves" 
 ON leave_requests FOR SELECT 
 USING (
-    auth.uid()::text = (SELECT auth_user_id::text FROM students WHERE students.id::text = student_id::text)
+    EXISTS (
+        SELECT 1 FROM students 
+        WHERE students.id = leave_requests.student_id 
+        AND students.auth_user_id = auth.uid()
+    )
 );
