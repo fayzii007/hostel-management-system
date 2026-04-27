@@ -155,7 +155,7 @@ const LeaveGatePass = () => {
                             <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-soft)', marginBottom: 8, display: 'block' }}>Destination (Optional)</label>
                             <div style={{ display: 'flex', alignItems: 'center', background: '#F8FAFC', border: '1px solid var(--border)', borderRadius: 12, padding: '0 12px' }}>
                                 <MapPin size={16} color="#94A3B8" />
-                                <input type="text" name="destination" placeholder="Where are you going?" value={form.destination} onChange={handleChange} style={{ border: 'none', background: 'transparent', width: '100%', padding: '12px', outline: 'none', color: 'var(--text-main)' }} />
+                                <input type="text" name="destination" placeholder="Where are you going?" value={form.destination} onChange={handleChange} style={{ border: 'none', background: 'transparent', width: '100%', padding: '12px', outline: 'none', boxShadow: 'none', color: 'var(--text-main)' }} />
                             </div>
                         </div>
 
@@ -163,7 +163,7 @@ const LeaveGatePass = () => {
                             <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-soft)', marginBottom: 8, display: 'block' }}>Reason for Leave</label>
                             <div style={{ display: 'flex', alignItems: 'flex-start', background: '#F8FAFC', border: '1px solid var(--border)', borderRadius: 12, padding: '12px' }}>
                                 <AlignLeft size={16} color="#94A3B8" style={{ marginTop: 2, marginRight: 8 }} />
-                                <textarea name="reason" placeholder="Please provide details..." value={form.reason} onChange={handleChange} required style={{ border: 'none', background: 'transparent', width: '100%', outline: 'none', color: 'var(--text-main)', resize: 'none', minHeight: '80px', fontFamily: 'inherit' }} />
+                                <textarea name="reason" placeholder="Please provide details..." value={form.reason} onChange={handleChange} required style={{ border: 'none', background: 'transparent', width: '100%', outline: 'none', boxShadow: 'none', color: 'var(--text-main)', resize: 'none', minHeight: '80px', fontFamily: 'inherit', padding: 0 }} />
                             </div>
                         </div>
 

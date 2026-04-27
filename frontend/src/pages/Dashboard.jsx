@@ -9,7 +9,7 @@ import Skeleton from '../components/Skeleton';
 import { useNavigate } from 'react-router-dom';
 import {
     PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend,
-    AreaChart, Area, XAxis, YAxis, CartesianGrid
+    BarChart, Bar, XAxis, YAxis, CartesianGrid
 } from 'recharts';
 
 // ─── Custom Recharts Tooltip ───────────────────────────────────────────
@@ -63,7 +63,7 @@ const Dashboard = () => {
     const [stats, setStats] = useState({ students: 0, rooms: 0, complaints: 0, payments: 0 });
     const [loading, setLoading] = useState(true);
     const [complaintChartData, setComplaintChartData] = useState([]);
-    const [paymentChartData, setPaymentChartData] = useState([]);
+    const [occupancyChartData, setOccupancyChartData] = useState([]);
     const [recentActivity, setRecentActivity] = useState([]);
 
     useEffect(() => {
@@ -111,24 +111,23 @@ const Dashboard = () => {
                     { name: 'Resolved', value: 4, color: '#22C55E', bg: '#DCFCE7', pct: 33 },
                 ]);
 
-                // ── Payment over months area chart ──
-                const monthMap = {};
-                payments.forEach(p => {
-                    const d = new Date(p.created_at || p.date);
-                    if (isNaN(d)) return;
-                    const key = d.toLocaleString('default', { month: 'short', year: '2-digit' });
-                    monthMap[key] = (monthMap[key] || 0) + (p.amount || 0);
+                // ── Room Occupancy by Floor ──
+                const floorMap = {};
+                rooms.forEach(r => {
+                    const match = r.room_number.toString().match(/\d+/);
+                    const floorNum = match ? match[0].length >= 3 ? match[0].charAt(0) : '1' : '1';
+                    const floorLabel = `Floor ${floorNum}`;
+                    if (!floorMap[floorLabel]) {
+                        floorMap[floorLabel] = { name: floorLabel, Capacity: 0, Occupied: 0 };
+                    }
+                    floorMap[floorLabel].Capacity += (r.capacity || 2);
+                    floorMap[floorLabel].Occupied += (r.occupancy || 0);
                 });
-                const payData = Object.entries(monthMap)
-                    .map(([month, amount]) => ({ month, amount }))
-                    .slice(-6);
-                setPaymentChartData(payData.length > 0 ? payData : [
-                    { month: 'Oct 24', amount: 12000 },
-                    { month: 'Nov 24', amount: 18500 },
-                    { month: 'Dec 24', amount: 9500 },
-                    { month: 'Jan 25', amount: 22000 },
-                    { month: 'Feb 25', amount: 15000 },
-                    { month: 'Mar 25', amount: 27000 },
+                const occData = Object.values(floorMap).sort((a, b) => a.name.localeCompare(b.name));
+                setOccupancyChartData(occData.length > 0 ? occData : [
+                    { name: 'Floor 1', Capacity: 20, Occupied: 15 },
+                    { name: 'Floor 2', Capacity: 20, Occupied: 18 },
+                    { name: 'Floor 3', Capacity: 20, Occupied: 5 }
                 ]);
 
                 // ── Recent Activity ──
@@ -332,32 +331,27 @@ const Dashboard = () => {
                     )}
                 </div>
 
-                {/* Area Chart: Payments over time */}
+                {/* Bar Chart: Room Occupancy */}
                 <div style={{ background: '#fff', borderRadius: 'var(--radius-xl)', padding: 24, border: '1px solid var(--border)', boxShadow: 'var(--shadow-sm)' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
                         <div>
-                            <h3 style={{ margin: 0, fontSize: '1rem', fontWeight: 800, letterSpacing: '-0.3px' }}>Payment Trends</h3>
-                            <p style={{ margin: '4px 0 0', fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 500 }}>Revenue over last 6 months</p>
+                            <h3 style={{ margin: 0, fontSize: '1rem', fontWeight: 800, letterSpacing: '-0.3px' }}>Room Occupancy</h3>
+                            <p style={{ margin: '4px 0 0', fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 500 }}>Capacity vs Occupied by Floor</p>
                         </div>
-                        <span style={{ fontSize: '0.72rem', fontWeight: 700, color: '#059669', background: '#DCFCE7', padding: '4px 10px', borderRadius: 99 }}>₹ INR</span>
+                        <span style={{ fontSize: '0.72rem', fontWeight: 700, color: '#5B5FED', background: '#EEF0FF', padding: '4px 10px', borderRadius: 99 }}>Real-time</span>
                     </div>
                     {loading ? (
                         <Skeleton width="100%" height="200px" borderRadius="12px" />
                     ) : (
                         <ResponsiveContainer width="100%" height={200}>
-                            <AreaChart data={paymentChartData} margin={{ top: 0, right: 0, left: -20, bottom: 0 }}>
-                                <defs>
-                                    <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="0%" stopColor="#5B5FED" stopOpacity={0.18} />
-                                        <stop offset="100%" stopColor="#5B5FED" stopOpacity={0} />
-                                    </linearGradient>
-                                </defs>
+                            <BarChart data={occupancyChartData} margin={{ top: 0, right: 0, left: -20, bottom: 0 }}>
                                 <CartesianGrid strokeDasharray="3 3" stroke="#F1F5F9" vertical={false} />
-                                <XAxis dataKey="month" tick={{ fontSize: 11, fill: '#94A3B8', fontWeight: 600 }} axisLine={false} tickLine={false} />
+                                <XAxis dataKey="name" tick={{ fontSize: 11, fill: '#94A3B8', fontWeight: 600 }} axisLine={false} tickLine={false} />
                                 <YAxis tick={{ fontSize: 11, fill: '#94A3B8' }} axisLine={false} tickLine={false} />
-                                <Tooltip content={<CustomTooltip />} cursor={{ stroke: '#5B5FED', strokeWidth: 1, strokeDasharray: '4 4' }} />
-                                <Area type="monotone" dataKey="amount" name="Amount (₹)" stroke="#5B5FED" strokeWidth={2.5} fill="url(#areaGradient)" dot={{ fill: '#5B5FED', strokeWidth: 2, r: 4 }} activeDot={{ r: 6, fill: '#5B5FED' }} />
-                            </AreaChart>
+                                <Tooltip content={<CustomTooltip />} cursor={{ fill: '#F8FAFC' }} />
+                                <Bar dataKey="Capacity" fill="#CBD5E1" radius={[4, 4, 0, 0]} barSize={16} />
+                                <Bar dataKey="Occupied" fill="#5B5FED" radius={[4, 4, 0, 0]} barSize={16} />
+                            </BarChart>
                         </ResponsiveContainer>
                     )}
                 </div>
